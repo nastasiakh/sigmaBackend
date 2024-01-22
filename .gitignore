@@ -1,0 +1,33 @@
+# Executables
+*.exe
+*.dll
+*.so
+*.dylib
+*.iml
+
+# Go
+bin/
+pkg/
+
+# Logs
+*.log
+
+# Cache
+.cache/
+
+# Local configuration
+.env
+
+# System
+.DS_Store
+Thumbs.db
+
+# IntelliJ IDEA
+.idea
+
+# GoLand
+.go
+
+build
+
+../SigmaPreAssignmentTask/sigma
