@@ -44,8 +44,15 @@ func (c *UserController) CreateUser(ctx *gin.Context) {
 		return
 	}
 
+	if err := entities.ValidateUser(user); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
 	err := c.userService.CreateUserService(user)
 	if err != nil {
+		// Обработка ошибок сервиса, если необходимо
+		ctx.JSON(500, gin.H{"error": "Failed to create user"})
 		return
 	}
 	ctx.JSON(201, user)
@@ -63,6 +70,11 @@ func (c *UserController) UpdateUser(ctx *gin.Context) {
 		return
 	}
 	user.ID = uint(id)
+
+	if err := entities.ValidateUser(user); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
 
 	c.userService.UpdateUserService(user)
 	ctx.JSON(200, user)
